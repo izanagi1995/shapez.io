@@ -46,4 +46,6 @@ workflows:
   unsigned-osx:
     jobs:
       - checkout-deps-install
-      - unsigned-osx-build
+      - unsigned-osx-build:
+          requires:
+            - checkout-deps-install
