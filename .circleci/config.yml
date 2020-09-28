@@ -13,11 +13,11 @@ jobs:
           keys:
             - brew-deps
       - run:
-          name: Install brew deps
-          command: brew install ffmpeg coreutils
-      - run:
           name: Do not upgrade node and yarn
           command: brew pin yarn node
+      - run:
+          name: Install brew deps
+          command: brew install ffmpeg
       - save_cache:
           name: Save brew deps to cache
           key: brew-deps
