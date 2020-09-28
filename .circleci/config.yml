@@ -5,6 +5,7 @@ jobs:
   checkout-deps-install:
     macos:
       xcode: 11.3.0
+    resource_class: large
     steps:
       - checkout
       - restore_cache:
@@ -14,11 +15,15 @@ jobs:
       - run:
           name: Install brew deps
           command: brew install ffmpeg coreutils
+      - run:
+          name: Do not upgrade node and yarn
+          command: brew pin yarn node
       - save_cache:
           name: Save brew deps to cache
           key: brew-deps
           paths:
             - /usr/local/Cellar
+            - /usr/local/Homebrew
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
@@ -37,6 +42,7 @@ jobs:
   unsigned-osx-build:
     macos:
       xcode: 11.3.0
+    resource_class: large
     steps:
       - run:
           name: Run the build
