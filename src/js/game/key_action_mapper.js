@@ -26,7 +26,7 @@ export const KEYMAPPINGS = {
         exportScreenshot: { keyCode: 114 }, // F3PS
         toggleFPSInfo: { keyCode: 115 }, // F4
 
-        switchLayers: { keyCode: key("Y") },
+        switchLayers: { keyCode: key("E") },
     },
 
     navigation: {
@@ -44,6 +44,7 @@ export const KEYMAPPINGS = {
     },
 
     buildings: {
+        // Primary Toolbar
         belt: { keyCode: key("1") },
         balancer: { keyCode: key("2") },
         underground_belt: { keyCode: key("3") },
@@ -54,18 +55,23 @@ export const KEYMAPPINGS = {
         mixer: { keyCode: key("8") },
         painter: { keyCode: key("9") },
         trash: { keyCode: key("0") },
-        storage: { keyCode: key("I") },
 
-        lever: { keyCode: key("L") },
-        filter: { keyCode: key("B") },
-        display: { keyCode: key("N") },
-        reader: { keyCode: key("J") },
+        // Secondary toolbar
+        storage: { keyCode: key("Y") },
+        reader: { keyCode: key("U") },
+        lever: { keyCode: key("I") },
+        filter: { keyCode: key("O") },
+        display: { keyCode: key("P") },
 
+        // Wires toolbar
         wire: { keyCode: key("1") },
         wire_tunnel: { keyCode: key("2") },
         constant_signal: { keyCode: key("3") },
         logic_gate: { keyCode: key("4") },
         virtual_processor: { keyCode: key("5") },
+        analyzer: { keyCode: key("6") },
+        comparator: { keyCode: key("7") },
+        transistor: { keyCode: key("8") },
     },
 
     placement: {
@@ -75,6 +81,8 @@ export const KEYMAPPINGS = {
         cycleBuildingVariants: { keyCode: key("T") },
         cycleBuildings: { keyCode: 9 }, // TAB
         switchDirectionLockSide: { keyCode: key("R") },
+
+        copyWireValue: { keyCode: key("Z") },
     },
 
     massSelect: {

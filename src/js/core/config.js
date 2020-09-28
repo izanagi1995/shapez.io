@@ -20,6 +20,7 @@ export const THIRDPARTY_URLS = {
     discord: "https://discord.gg/HN7EVzV",
     github: "https://github.com/tobspr/shapez.io",
     reddit: "https://www.reddit.com/r/shapezio",
+    shapeViewer: "https://viewer.shapez.io",
 
     standaloneStorePage: "https://store.steampowered.com/app/1318690/shapezio/",
 };
@@ -65,7 +66,7 @@ export const globalConfig = {
 
     buildingSpeeds: {
         cutter: 1 / 4,
-        cutterQuad: 1 / 3,
+        cutterQuad: 1 / 4,
         rotater: 1 / 1,
         rotaterCCW: 1 / 1,
         rotater180: 1 / 1,
@@ -73,7 +74,7 @@ export const globalConfig = {
         painterDouble: 1 / 8,
         painterQuad: 1 / 2,
         mixer: 1 / 5,
-        stacker: 1 / 6,
+        stacker: 1 / 8,
     },
 
     // Zooming
