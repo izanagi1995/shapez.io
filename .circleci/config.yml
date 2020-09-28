@@ -13,8 +13,8 @@ jobs:
           keys:
             - brew-deps
       - run:
-          name: Do not upgrade node and yarn
-          command: brew pin yarn node
+          name: Do not upgrade node, yarn and git
+          command: brew pin yarn node git
       - run:
           name: Install brew deps
           command: brew install ffmpeg
