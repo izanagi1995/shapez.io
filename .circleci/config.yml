@@ -5,7 +5,6 @@ jobs:
   checkout-deps-install:
     macos:
       xcode: 11.3.0
-    resource_class: large
     steps:
       - checkout
       - restore_cache:
@@ -39,8 +38,10 @@ jobs:
   unsigned-osx-build:
     macos:
       xcode: 11.3.0
-    resource_class: large
     steps:
+      - run:
+          name: ls debug
+          command: ls
       - run:
           name: Run the build
           command: cd gulp && gulp standalone.package.prod.darwin64.unsigned
