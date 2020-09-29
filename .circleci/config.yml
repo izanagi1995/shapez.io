@@ -1,10 +1,8 @@
 # Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 # Orchestrate or schedule a set of jobs
-jobs:
+commands:
   checkout-deps-install:
-    macos:
-      xcode: 11.3.0
     steps:
       - checkout
       - restore_cache:
@@ -35,10 +33,12 @@ jobs:
           key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
+jobs:
   unsigned-osx-build:
     macos:
       xcode: 11.3.0
     steps:
+      - checkout-deps-install
       - run:
           name: ls debug
           command: ls
@@ -49,7 +49,4 @@ workflows:
   # Name the workflow "welcome"
   unsigned-osx:
     jobs:
-      - checkout-deps-install
-      - unsigned-osx-build:
-          requires:
-            - checkout-deps-install
+      - unsigned-osx-build
