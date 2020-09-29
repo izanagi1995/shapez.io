@@ -11,10 +11,10 @@ commands:
             - brew-deps
       - run:
           name: Load tap
-          command: brew install homebrew-ffmpeg/ffmpeg/ffmpeg
+          command: brew tap homebrew-ffmpeg/ffmpeg/ffmpeg
       - run:
           name: Install brew deps
-          command: HOMEBREW_NO_AUTO_UPDATE=1 brew install homebrew-ffmpeg/ffmpeg/ffmpeg
+          command: HOMEBREW_NO_AUTO_UPDATE=1 brew install libpng homebrew-ffmpeg/ffmpeg/ffmpeg
       - save_cache:
           name: Save brew deps to cache
           key: brew-deps
