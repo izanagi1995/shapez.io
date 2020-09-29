@@ -26,6 +26,9 @@ commands:
           name: Install node deps
           command: yarn install --immutable
       - run:
+          name: Install gulp globally
+          command: yarm global install gulp
+      - run:
           name: Install gulp node deps
           command: cd gulp && yarn install --immutable
       - save_cache:
