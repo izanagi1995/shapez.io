@@ -21,7 +21,7 @@ commands:
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
+            - yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
       - run:
           name: Install node deps
           command: yarn install --immutable
@@ -33,13 +33,14 @@ commands:
           command: cd gulp && yarn install --immutable
       - save_cache:
           name: Save Yarn Package Cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
+          key: yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
+            - ~/project/node_modules
 jobs:
   unsigned-osx-build:
     macos:
-      xcode: 11.3.0
+      xcode: 12.2.0
     steps:
       - checkout-deps-install
       - run:
