@@ -10,6 +10,9 @@ commands:
           keys:
             - brew-deps
       - run:
+          name: Load tap
+          command: brew install justinmayer/tap/ffmpeg
+      - run:
           name: Install brew deps
           command: HOMEBREW_NO_AUTO_UPDATE=1 brew install ffmpeg
       - save_cache:
