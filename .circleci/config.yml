@@ -12,7 +12,7 @@ commands:
       - run: brew link libpng fontconfig frei0r lame lzo libass libvorbis libvpx opus rtmpdump sdl2 snappy theora x264 x265 xz libogg
       - run:
           name: Install brew deps
-          command: (ls /usr/local/Cellar/ffmpeg/4*/bin/ffmpeg && brew link homebrew-ffmpeg/ffmpeg/ffmpeg) || HOMEBREW_NO_AUTO_UPDATE=1 brew install homebrew-ffmpeg/ffmpeg/ffmpeg
+          command: (ls /usr/local/Cellar/ffmpeg/4*/bin/ffmpeg && brew link ffmpeg) || HOMEBREW_NO_AUTO_UPDATE=1 brew install homebrew-ffmpeg/ffmpeg/ffmpeg
       - save_cache:
           name: Save brew deps to cache
           key: brew-deps
