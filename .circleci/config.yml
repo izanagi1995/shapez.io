@@ -9,7 +9,7 @@ commands:
           name: Restore brew deps
           keys:
             - brew-deps
-      - run: brew link libpng
+      - run: brew link libpng fontconfig
       - run:
           name: Install brew deps
           command: HOMEBREW_NO_AUTO_UPDATE=1 brew install homebrew-ffmpeg/ffmpeg/ffmpeg
