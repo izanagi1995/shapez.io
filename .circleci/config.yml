@@ -32,6 +32,9 @@ commands:
       - run:
           name: Install gulp node deps
           command: cd gulp && yarn install --immutable
+      - run:
+          name: Install electron node deps
+          command: cd electron && yarn install --immutable
       - save_cache:
           name: Save Yarn Package Cache
           key: yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
@@ -39,6 +42,7 @@ commands:
             - ~/.cache/yarn
             - ~/project/node_modules
             - ~/project/gulp/node_modules
+            - ~/project/electron/node_modules
 jobs:
   unsigned-osx-build:
     macos:
