@@ -5,10 +5,10 @@ commands:
   checkout-deps-install:
     steps:
       - checkout
-      # - restore_cache:
-      #    name: Restore brew deps
-      #    keys:
-      #      - brew-deps
+      - restore_cache:
+          name: Restore brew deps
+          keys:
+            - brew-deps
       # Fixme
       # - run: brew link libpng fontconfig frei0r lame lzo libass libvorbis libvpx opus rtmpdump sdl2 snappy theora x264 x265 xz libogg
       - run:
@@ -50,7 +50,7 @@ jobs:
           command: ls
       - run:
           name: Run the build
-          command: cd gulp && gulp standalone.package.prod.darwin64.unsigned
+          command: cd gulp && yarn gulp standalone.package.prod.darwin64.unsigned
 workflows:
   # Name the workflow "welcome"
   unsigned-osx:
