@@ -10,7 +10,7 @@ commands:
           keys:
             - brew-deps
       # Fixme
-      - run: brew link libpng fontconfig frei0r lame lzo libass libvorbis libvpx opus rtmpdump sdl2 snappy theora x264 x265 xz
+      - run: brew link libpng fontconfig frei0r lame lzo libass libvorbis libvpx opus rtmpdump sdl2 snappy theora x264 x265 xz libogg
       - run:
           name: Install brew deps
           command: HOMEBREW_NO_AUTO_UPDATE=1 brew install homebrew-ffmpeg/ffmpeg/ffmpeg
