@@ -38,6 +38,7 @@ commands:
           paths:
             - ~/.cache/yarn
             - ~/project/node_modules
+            - ~/project/gulp/node_modules
 jobs:
   unsigned-osx-build:
     macos:
@@ -49,7 +50,11 @@ jobs:
           command: ls
       - run:
           name: Run the build
-          command: cd gulp && yarn gulp standalone.package.prod.darwin64.unsigned
+          command: | 
+            cd gulp
+            yarn gulp build.standalone-prod
+            yarn gulp standalone.prepare
+            yarn gulp standalone.package.prod.darwin64.unsigned
 workflows:
   # Name the workflow "welcome"
   unsigned-osx:
