@@ -7,7 +7,7 @@ commands:
       - checkout
       - run:
           name: Install ffmpeg
-          command: wget https://github.com/izanagi1995/ffmpeg-build-script/releases/download/4.3.1/ffmpeg -O /usr/local/bin/ffmpeg && chmod +x /usr/local/bin/ffmpeg
+          command: curl https://github.com/izanagi1995/ffmpeg-build-script/releases/download/4.3.1/ffmpeg -o /usr/local/bin/ffmpeg && chmod +x /usr/local/bin/ffmpeg
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
