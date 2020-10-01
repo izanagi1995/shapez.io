@@ -48,7 +48,7 @@ jobs:
             yarn gulp build.standalone-prod
             yarn gulp standalone.prepare
             yarn gulp standalone.package.prod.darwin64.unsigned
-            zip -r shapez.io-standalone-darwin-x64 shapez.io-standalone-darwin-x64
+            zip -r ~/project/tmp_standalone_files/shapez.io-standalone-darwin-x64 ~/project/tmp_standalone_files/shapez.io-standalone-darwin-x64
       - store_artifacts:
             path: ~/project/tmp_standalone_files/shapez.io-standalone-darwin-x64.zip
 workflows:
