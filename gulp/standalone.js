@@ -112,7 +112,7 @@ function gulptasksStandalone($, gulp) {
                   },
                 osxNotarize: {
                     appleId: process.env.SHAPEZ_CLI_APPLE_ID,
-                    appleIdPassword: "@keychain:SHAPEZ_CLI_APPLE_ID"
+                    appleIdPassword: process.env.SHAPEZ_CLI_APPLE_APP_SPECIFIC_PASSWORD
                 }
             })
         }).then(

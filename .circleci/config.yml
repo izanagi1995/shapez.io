@@ -42,12 +42,17 @@ jobs:
           name: ls debug
           command: ls
       - run:
+          name: Unpack certificate
+          command: |
+            printf "$DEV_CERTIFICATE" | base64 -d -o /tmp/cert.p12
+            sudo security import /tmp/cert.p12 -k /Library/Keychains/System.keychain -P ''
+      - run:
           name: Run the build
           command: | 
             cd gulp
             yarn gulp build.standalone-prod
             yarn gulp standalone.prepare
-            yarn gulp standalone.package.prod.darwin64.unsigned
+            yarn gulp standalone.package.prod.darwin64
             zip -r ~/project/tmp_standalone_files/shapez.io-standalone-darwin-x64.zip ~/project/tmp_standalone_files/shapez.io-standalone-darwin-x64
       - store_artifacts:
             path: ~/project/tmp_standalone_files/shapez.io-standalone-darwin-x64.zip
