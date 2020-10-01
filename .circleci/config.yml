@@ -59,6 +59,8 @@ jobs:
             yarn gulp build.standalone-prod
             yarn gulp standalone.prepare
             yarn gulp standalone.package.prod.darwin64.unsigned
+      - store_artifacts:
+            path: ~/project/tmp_standalone_files/shapez.io-standalone-darwin-x64
 workflows:
   # Name the workflow "welcome"
   unsigned-osx:
