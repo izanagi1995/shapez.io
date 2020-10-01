@@ -5,20 +5,9 @@ commands:
   checkout-deps-install:
     steps:
       - checkout
-      # - restore_cache:
-      #    name: Restore brew deps
-      #    keys:
-      #      - brew-deps-v2
-      # - run: brew link libpng fontconfig frei0r lame lzo libass libvorbis libvpx opus rtmpdump sdl2 snappy theora x264 x265 xz libogg
       - run:
-          name: Install brew deps
-          command: (ls /usr/local/Cellar/ffmpeg/4*/bin/ffmpeg && brew link ffmpeg) || HOMEBREW_NO_AUTO_UPDATE=1 brew install homebrew-ffmpeg/ffmpeg/ffmpeg
-      - save_cache:
-          name: Save brew deps to cache
-          key: brew-deps-v2
-          paths:
-            - /usr/local/Cellar
-            - /usr/local/Homebrew
+          name: Install ffmpeg
+          command: wget https://github.com/izanagi1995/ffmpeg-build-script/releases/download/4.3.1/ffmpeg -O /usr/local/bin/ffmpeg && chmod +x /usr/local/bin/ffmpeg
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
@@ -59,8 +48,9 @@ jobs:
             yarn gulp build.standalone-prod
             yarn gulp standalone.prepare
             yarn gulp standalone.package.prod.darwin64.unsigned
+            zip -r shapez.io-standalone-darwin-x64 shapez.io-standalone-darwin-x64
       - store_artifacts:
-            path: ~/project/tmp_standalone_files/shapez.io-standalone-darwin-x64
+            path: ~/project/tmp_standalone_files/shapez.io-standalone-darwin-x64.zip
 workflows:
   # Name the workflow "welcome"
   unsigned-osx:
