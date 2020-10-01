@@ -5,24 +5,24 @@ commands:
   checkout-deps-install:
     steps:
       - checkout
-      - restore_cache:
-          name: Restore brew deps
-          keys:
-            - brew-deps
-      - run: brew link libpng fontconfig frei0r lame lzo libass libvorbis libvpx opus rtmpdump sdl2 snappy theora x264 x265 xz libogg
+      # - restore_cache:
+      #    name: Restore brew deps
+      #    keys:
+      #      - brew-deps-v2
+      # - run: brew link libpng fontconfig frei0r lame lzo libass libvorbis libvpx opus rtmpdump sdl2 snappy theora x264 x265 xz libogg
       - run:
           name: Install brew deps
           command: (ls /usr/local/Cellar/ffmpeg/4*/bin/ffmpeg && brew link ffmpeg) || HOMEBREW_NO_AUTO_UPDATE=1 brew install homebrew-ffmpeg/ffmpeg/ffmpeg
       - save_cache:
           name: Save brew deps to cache
-          key: brew-deps
+          key: brew-deps-v2
           paths:
             - /usr/local/Cellar
             - /usr/local/Homebrew
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
-            - yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}-v2
       - run:
           name: Install node deps
           command: yarn install --immutable
@@ -37,7 +37,7 @@ commands:
           command: cd electron && yarn install --immutable
       - save_cache:
           name: Save Yarn Package Cache
-          key: yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          key: yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}-v2
           paths:
             - ~/.cache/yarn
             - ~/project/node_modules
