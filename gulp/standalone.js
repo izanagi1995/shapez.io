@@ -108,7 +108,7 @@ function gulptasksStandalone($, gulp) {
                     hardenedRuntime: true,
                     entitlements: 'entitlements.plist',
                     'entitlements-inherit': 'entitlements.plist',
-                    'signature-flags': 'library'
+                    'signature-flags': 'library',
                     ...(process.env.KEYCHAIN_PATH && {
                         'keychain': process.env.KEYCHAIN_PATH
                     })
