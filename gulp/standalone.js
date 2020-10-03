@@ -109,6 +109,9 @@ function gulptasksStandalone($, gulp) {
                     entitlements: 'entitlements.plist',
                     'entitlements-inherit': 'entitlements.plist',
                     'signature-flags': 'library'
+                    ...(process.env.KEYCHAIN_PATH && {
+                        'keychain': process.env.KEYCHAIN_PATH
+                    })
                   },
                 osxNotarize: {
                     appleId: process.env.SHAPEZ_CLI_APPLE_ID,

@@ -46,8 +46,9 @@ jobs:
           command: |
             printf "$DEV_CERTIFICATE" | base64 -d -o /tmp/cert.p12
             printf "$DEV_CERTIFICATE_SIGNING" | base64 -d -o /tmp/cert.cer
-            sudo security import /tmp/cert.p12 -k /Library/Keychains/System.keychain -P ''
-            sudo security import /tmp/cert.cer -k /Library/Keychains/System.keychain -P ''
+            sudo security create-keychain -p '' "$KEYCHAIN_PATH"
+            sudo security import /tmp/cert.p12 -k "$KEYCHAIN_PATH" -P ''
+            sudo security import /tmp/cert.cer -k "$KEYCHAIN_PATH" -P ''
       - run:
           name: Run the build
           no_output_timeout: 60m
@@ -55,6 +56,7 @@ jobs:
             cd gulp
             yarn gulp build.standalone-prod
             yarn gulp standalone.prepare
+            sudo security unlock-keychain -p '' "$KEYCHAIN_PATH"
             yarn gulp standalone.package.prod.darwin64
             zip -r ~/project/tmp_standalone_files/shapez.io-standalone-darwin-x64.zip ~/project/tmp_standalone_files/shapez.io-standalone-darwin-x64
       - store_artifacts:
