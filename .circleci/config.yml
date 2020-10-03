@@ -39,9 +39,6 @@ jobs:
     steps:
       - checkout-deps-install
       - run:
-          name: ls debug
-          command: ls
-      - run:
           name: Unpack certificate
           command: |
             printf "$DEV_CERTIFICATE" | base64 -d -o /tmp/cert.p12
@@ -49,6 +46,11 @@ jobs:
             sudo security create-keychain -p '' "$KEYCHAIN_PATH"
             sudo security import /tmp/cert.p12 -k "$KEYCHAIN_PATH" -P '' -A
             sudo security add-trusted-cert -d -r trustAsRoot -p codeSign -k "$KEYCHAIN_PATH" /tmp/cert.cer
+      - run:
+          name: Debug identities
+          command: |
+            sudo security find-identity -v "$KEYCHAIN_PATH"
+            sudo security find-identity -v "$KEYCHAIN_PATH" -p codesigning
       - run:
           name: Run the build
           no_output_timeout: 60m
