@@ -45,7 +45,9 @@ jobs:
           name: Unpack certificate
           command: |
             printf "$DEV_CERTIFICATE" | base64 -d -o /tmp/cert.p12
+            printf "$DEV_CERTIFICATE_SIGNING" | base64 -d -o /tmp/cert.cer
             sudo security import /tmp/cert.p12 -k /Library/Keychains/System.keychain -P ''
+            sudo security import /tmp/cert.cer -k /Library/Keychains/System.keychain -P ''
       - run:
           name: Run the build
           command: | 
