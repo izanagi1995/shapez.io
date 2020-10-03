@@ -47,8 +47,8 @@ jobs:
             printf "$DEV_CERTIFICATE" | base64 -d -o /tmp/cert.p12
             printf "$DEV_CERTIFICATE_SIGNING" | base64 -d -o /tmp/cert.cer
             sudo security create-keychain -p '' "$KEYCHAIN_PATH"
-            sudo security import /tmp/cert.p12 -k "$KEYCHAIN_PATH" -P ''
-            sudo security import /tmp/cert.cer -k "$KEYCHAIN_PATH" -P ''
+            sudo security import /tmp/cert.p12 -k "$KEYCHAIN_PATH" -P '' -A
+            sudo security add-trusted-cert -d -r trustAsRoot -p codeSign -k "$KEYCHAIN_PATH" /tmp/cert.cer
       - run:
           name: Run the build
           no_output_timeout: 60m
