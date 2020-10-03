@@ -50,6 +50,7 @@ jobs:
             sudo security import /tmp/cert.cer -k /Library/Keychains/System.keychain -P ''
       - run:
           name: Run the build
+          no_output_timeout: 60m
           command: | 
             cd gulp
             yarn gulp build.standalone-prod
