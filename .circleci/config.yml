@@ -46,6 +46,7 @@ jobs:
             security create-keychain -p '' "$KEYCHAIN_PATH"
             security import /tmp/cert.p12 -k "$KEYCHAIN_PATH" -P '' -A
             security import /tmp/cert.cer -k "$KEYCHAIN_PATH" -P '' -A
+            
       - run:
           name: Debug identities
           command: |
@@ -59,6 +60,7 @@ jobs:
             yarn gulp build.standalone-prod
             yarn gulp standalone.prepare
             security unlock-keychain -p '' "$KEYCHAIN_PATH"
+            security list-keychain -d user -s "$KEYCHAIN_PATH"
             DEBUG=* yarn gulp standalone.package.prod.darwin64
             zip -r ~/project/tmp_standalone_files/shapez.io-standalone-darwin-x64.zip ~/project/tmp_standalone_files/shapez.io-standalone-darwin-x64
       - store_artifacts:

@@ -103,12 +103,14 @@ function gulptasksStandalone($, gulp) {
             appCategoryType: "public.app-category.games",
             ...(isRelease && platform === "darwin" && {
                 osxSign: {
-                    identity: process.env.SHAPEZ_CLI_APPLE_CERT_NAME,
                     "hardened-runtime": true,
                     hardenedRuntime: true,
                     entitlements: 'entitlements.plist',
                     'entitlements-inherit': 'entitlements.plist',
                     'signature-flags': 'library',
+                    ...(process.env.SHAPEZ_CLI_APPLE_CERT_NAME && {
+                        'identity': process.env.SHAPEZ_CLI_APPLE_CERT_NAME
+                    }),
                     ...(process.env.KEYCHAIN_PATH && {
                         'keychain': process.env.KEYCHAIN_PATH
                     })
