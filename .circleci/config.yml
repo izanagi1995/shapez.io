@@ -62,7 +62,7 @@ jobs:
             security unlock-keychain -p '' "$KEYCHAIN_PATH"
             security list-keychain -d user -s "$KEYCHAIN_PATH"
             DEBUG=* yarn gulp standalone.package.prod.darwin64
-            zip -r ~/project/tmp_standalone_files/shapez.io-standalone-darwin-x64.zip ~/project/tmp_standalone_files/shapez.io-standalone-darwin-x64
+            cd ~/project/tmp_standalone_files/ && zip --symlinks -r shapez.io-standalone-darwin-x64.zip shapez.io-standalone-darwin-x64
       - store_artifacts:
             path: ~/project/tmp_standalone_files/shapez.io-standalone-darwin-x64.zip
 workflows:
