@@ -33,7 +33,7 @@ commands:
             - ~/project/gulp/node_modules
             - ~/project/electron/node_modules
 jobs:
-  unsigned-osx-build:
+  signed-osx-build:
     macos:
       xcode: 12.2.0
     steps:
@@ -67,6 +67,6 @@ jobs:
             path: ~/project/tmp_standalone_files/shapez.io-standalone-darwin-x64.zip
 workflows:
   # Name the workflow "welcome"
-  unsigned-osx:
+  signed-osx:
     jobs:
-      - unsigned-osx-build
+      - signed-osx-build
