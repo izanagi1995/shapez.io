@@ -1,9 +1,10 @@
-require('colors');
+require("colors");
 const packager = require("electron-packager");
 const path = require("path");
 const { getVersion } = require("./buildutils");
 const fs = require("fs");
 const fse = require("fs-extra");
+const buildutils = require("./buildutils");
 const execSync = require("child_process").execSync;
 
 function gulptasksStandalone($, gulp) {
@@ -44,6 +45,20 @@ function gulptasksStandalone($, gulp) {
                 4
             )
         );
+        cb();
+    });
+
+    gulp.task("standalone.prepareVDF", cb => {
+        const hash = buildutils.getRevision();
+
+        const steampipeDir = path.join(__dirname, "steampipe", "scripts");
+        const templateContents = fs
+            .readFileSync(path.join(steampipeDir, "app.vdf.template"), { encoding: "utf-8" })
+            .toString();
+
+        const convertedContents = templateContents.replace("$DESC$", "Commit " + hash);
+        fs.writeFileSync(path.join(steampipeDir, "app.vdf"), convertedContents);
+
         cb();
     });
 
@@ -104,15 +119,15 @@ function gulptasksStandalone($, gulp) {
             ...(isRelease && platform === "darwin" && {
                 osxSign: {
                     "hardened-runtime": true,
-                    hardenedRuntime: true,
-                    entitlements: 'entitlements.plist',
-                    'entitlements-inherit': 'entitlements.plist',
-                    'signature-flags': 'library',
+                    "hardenedRuntime": true,
+                    "entitlements": 'entitlements.plist',
+                    "entitlements-inherit": 'entitlements.plist',
+                    "signature-flags": 'library',
                     ...(process.env.SHAPEZ_CLI_APPLE_CERT_NAME && {
-                        'identity': process.env.SHAPEZ_CLI_APPLE_CERT_NAME
+                        "identity": process.env.SHAPEZ_CLI_APPLE_CERT_NAME
                     }),
                     ...(process.env.KEYCHAIN_PATH && {
-                        'keychain': process.env.KEYCHAIN_PATH
+                        "keychain": process.env.KEYCHAIN_PATH
                     })
                   },
                 osxNotarize: {
@@ -145,9 +160,13 @@ function gulptasksStandalone($, gulp) {
                     }
 
                     if (process.platform === "win32" && platform === "darwin") {
-                        console.warn("Cross-building for macOS on Windows: dereferencing symlinks.\n".red +
-                        "This will nearly double app size and make code signature invalid. Sorry!\n".red.bold +
-                        "For more information, see " + "https://github.com/electron/electron-packager/issues/71".underline);
+                        console.warn(
+                            "Cross-building for macOS on Windows: dereferencing symlinks.\n".red +
+                                "This will nearly double app size and make code signature invalid. Sorry!\n"
+                                    .red.bold +
+                                "For more information, see " +
+                                "https://github.com/electron/electron-packager/issues/71".underline
+                        );
 
                         // Clear up framework folders
                         fs.writeFileSync(
@@ -200,7 +219,9 @@ function gulptasksStandalone($, gulp) {
     gulp.task("standalone.package.prod.linux64", cb => packageStandalone("linux", "x64", cb));
     gulp.task("standalone.package.prod.linux32", cb => packageStandalone("linux", "ia32", cb));
     gulp.task("standalone.package.prod.darwin64", cb => packageStandalone("darwin", "x64", cb));
-    gulp.task("standalone.package.prod.darwin64.unsigned", cb => packageStandalone("darwin", "x64", cb, false));
+    gulp.task("standalone.package.prod.darwin64.unsigned", cb =>
+        packageStandalone("darwin", "x64", cb, false)
+    );
 
     gulp.task(
         "standalone.package.prod",
